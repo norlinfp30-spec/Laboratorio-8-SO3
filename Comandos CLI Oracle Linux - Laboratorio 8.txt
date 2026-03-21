@@ -1,0 +1,51 @@
+PRÁCTICA 1: Docker + NGINX 
+1. INSTALAR DOCKER
+
+Ejecuta:
+sudo dnf install -y dnf-utils
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo dnf install -y docker-ce docker-ce-cli containerd.io
+
+
+
+sudo systemctl start docker
+sudo systemctl enable docker
+
+
+
+docker --version
+2. DESCARGAR NGINX
+
+
+docker pull nginx
+3. CREAR VOLUMEN PERSISTENTE
+🎤 Di:
+
+
+
+mkdir -p /home/website
+4. CREAR PÁGINA HTML
+
+nano /home/website/index.html
+Escribe:
+<html>
+<head><title>Mi Página</title></head>
+<body>
+<h1>Nombre: TU NOMBRE</h1>
+<h2>Matricula: TU MATRICULA</h2>
+</body>
+</html>
+
+
+5. CREAR CONTENEDOR NGINX
+
+docker run -d \
+-p 8888:80 \
+-v /home/website:/usr/share/nginx/html \
+--name nginx-container \
+nginx
+6. CONFIGURAR FIREWALL (CLAVE)
+
+
+sudo firewall-cmd --add-port=8888/tcp --permanent
+sudo firewall-cmd --reload
