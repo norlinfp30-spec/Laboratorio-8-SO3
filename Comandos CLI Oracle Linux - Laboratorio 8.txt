@@ -41,3 +41,6 @@ nginx
 
 sudo firewall-cmd --add-port=8888/tcp --permanent
 sudo firewall-cmd --reload
+Abre:
+http://127.0.0.1:8888
+
