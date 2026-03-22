@@ -22,3 +22,4 @@ Practica 3: Despliegue de contenedor de Wordpress utilizando Docker-Compose
 • Una vez finalizado el despliegue ingrese mediante el navegador y configure wordpress para su correcto uso.
 
 Este es el enlace a la lista de reproduccion en youtube: ↓
+https://www.youtube.com/playlist?list=PLpcZGYtY2vZZ7nBtnQbeLVhHIADBzg1Ds
