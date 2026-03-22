@@ -44,3 +44,44 @@ sudo firewall-cmd --reload
 Abre:
 http://127.0.0.1:8888
 
+Practica 2
+
+PRÁCTICA 2: PORTAINER
+ 1. Descargar imagen de Portainer
+sudo docker pull portainer/portainer-ce
+2. Crear volumen para Portainer
+sudo docker volume create portainer_data
+3. Crear contenedor Portainer
+sudo docker run -d \
+-p 8000:8000 \
+-p 9443:9443 \
+--name portainer \
+--restart=always \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v portainer_data:/data \
+portainer/portainer-ce
+4. Acceder a Portainer
+
+Abre:
+
+https://127.0.0.1:9443
+
+Crear usuario administrador.
+
+Selecciona:
+Local Docker Environment
+
+5. Detener NGINX desde Portainer
+
+Dentro de Portainer:
+
+Ve a Containers
+Busca mi_nginx
+Click en Stop
+6. Verificar en navegador
+
+vuelve a:
+
+http://127.0.0.1:8888
+
+Ya NO debe cargar → prueba de que el contenedor se detuvo.
