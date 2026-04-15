@@ -193,4 +193,45 @@ Práctica Docker WordPress
 
 http://IP_DEL_SERVIDOR:8081
 
+mkdir -p /home/website
+echo "<h1>Servidor 1</h1><h2>Nombre: Nolberto Francisco Perez</h2><h2>Matricula: 20252263</h2>" > /home/website/index.html
 
+docker run -d -p 80:80 -v /home/website:/usr/share/nginx/html --name nginx-server --restart always nginx
+
+mkdir -p /home/website
+echo "<h1>Servidor 2</h1><h2>Nombre: Nolberto Francisco Perez</h2><h2>Matricula: 20252263</h2>" > /home/website/index.html
+
+docker run -d -p 80:80 -v /home/website:/usr/share/nginx/html --name nginx-server --restart always nginx
+
+vrrp_instance VI_1 {
+    state MASTER
+    interface eth0           # Verifica el nombre de tu interfaz con 'ip a'
+    virtual_router_id 51
+    priority 100             # Mayor prioridad para el Master
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1234
+    }
+    virtual_ipaddress {
+        192.168.0.200        # Esta será la IP que usarás para entrar al sitio
+    }
+}
+
+
+vrrp_instance VI_1 {
+    state BACKUP
+    interface eth0
+    virtual_router_id 51
+    priority 90              # Menor prioridad que el Master
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1234
+    }
+    virtual_ipaddress {
+        192.168.0.200
+    }
+}
+
+sudo systemctl enable --now keepalived
